@@ -8,13 +8,17 @@ for(var i = 0;i < numberOfDrumButtons; i++) {
      var buttonInnerHTML = this.innerHTML;
     
      makeSound(buttonInnerHTML);
+
+     buttonAnimation(buttonInnerHTML);
     });    
 }
 
 //Detecting keyboard press
 addEventListener("keypress", function(event) {
   makeSound(event.key);
-})
+
+  buttonAnimation(event.key);
+});
 
 
 
@@ -36,29 +40,37 @@ function makeSound(key){
             audio.play();
         break;
 
-       case "d": 
+        case "d": 
             var audio = new Audio("sounds/tom-4.mp3");
            audio.play();
-       break;
+        break;
 
-
-      case "j": 
+        case "j": 
            var audio = new Audio("sounds/snare.mp3");
            audio.play();
-      break;
+        break;
 
-     case "k": 
+        case "k": 
            var audio = new Audio("sounds/crash.mp3");
            audio.play();
-     break;
+        break;
 
 
-    case "l": 
+        case "l": 
             var audio = new Audio("sounds/kick-bass.mp3");
-           audio.play();
-    break;
+            audio.play();
+        break;
 
-    //else   
-    default: console.log(key);
+        //else   
+        default: console.log(key);
     }
+}
+
+function buttonAnimation(currentKey){
+   var activeButton =  document.querySelector("."+currentKey);
+   activeButton.classList.add('pressed');
+
+   setTimeout(function(){
+       activeButton.classList.remove("pressed");
+   },150);
 }
